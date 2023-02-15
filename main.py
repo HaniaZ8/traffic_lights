@@ -17,33 +17,50 @@ from tkinter import *
 
 box = Tk()
 box.geometry("300x400")
+canvas = Canvas(width=200, height=300, bg="black")
+working = False
+def start(canvas2=canvas):
+    global working
+    # grey_green = canvas.create_oval(60, 200, 140, 280,
+    # outline= '#808080', fill= '#808080')
+    # grey_yellow = canvas.create_oval(60, 110, 140, 190,
+    # outline= '#808080', fill= '#808080')
+    while working == False:
+        working = not working
+        canvas2.pack(anchor=CENTER, expand=1)
+        red = canvas2.create_oval(60, 20, 140, 100,
+                                  outline="#ff0000", fill="#ff0000")
+        yellow = canvas2.create_oval(60, 110, 140, 190,
+                                     outline="#ffff00", fill="#ffff00")
+        green = canvas2.create_oval(60, 200, 140, 280,
+                                    outline="#008000", fill="#008000")
+        canvas2.pack(anchor=CENTER, expand=1)
+    red.pack_forget()
+    working = not working
 
 
 class Example(Frame):
-    lights_working = False
 
     def __init__(self):
         super().__init__()
         self.initUI()
-        button = Button(text="START", width=20, height=3, command=)
+        button = Button(text="START/STOP", width=20, height=3, command=start)
         button.pack(anchor=N, expand=1)
 
     def initUI(self):
         self.master.title("Traffic Lights")
 
-        canvas = Canvas(width=200, height=300, bg="black")
+        canvas.create_oval(60, 200, 140, 280, outline='#808080', fill='#808080')
+        canvas.create_oval(60, 110, 140, 190, outline='#808080', fill='#808080')
+        canvas.create_oval(60, 20, 140, 100, outline='#808080', fill='#808080')
 
-        red = canvas.create_oval(60, 20, 140, 100,
-                                 outline="#ff0000", fill="#ff0000")
-        yellow = canvas.create_oval(60, 110, 140, 190,
-                                    outline="#ffff00", fill="#ffff00")
-        green = canvas.create_oval(60, 200, 140, 280,
-                                   outline="#008000", fill="#008000")
+        # red = canvas.create_oval(60, 20, 140, 100,
+        #                         outline="#ff0000", fill="#ff0000")
+        # yellow = canvas.create_oval(60, 110, 140, 190,
+        #                            outline="#ffff00", fill="#ffff00")
+        # green = canvas.create_oval(60, 200, 140, 280,
+        #                           outline="#008000", fill="#008000")
         canvas.pack(anchor=CENTER, expand=1)
-
-    def start(self):
-        canvas.create_oval(60, 200, 140, 280,
-                                               outline="#808080", fill="#808080")
 
 
 def main():
