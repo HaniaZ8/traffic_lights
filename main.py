@@ -16,31 +16,39 @@ from tkinter import *
 # heading.pack()
 
 box = Tk()
-box.geometry("200x300")
+box.geometry("300x400")
 
 
 class Example(Frame):
+    lights_working = False
 
     def __init__(self):
         super().__init__()
-
         self.initUI()
+        button = Button(text="START", width=20, height=3, command=)
+        button.pack(anchor=N, expand=1)
 
     def initUI(self):
-        self.master.title("Colours")
-        self.pack(expand=1)
+        self.master.title("Traffic Lights")
 
-        canvas = Canvas(self, width=200, height=300, bg="black")
+        canvas = Canvas(width=200, height=300, bg="black")
 
-        red = canvas.create_rectangle(50, 15, 150, 65,
-                             outline="#ff0000", fill="#ff0000")
-        yellow = canvas.create_rectangle(50, 75, 150, 125,
-                                outline="#ffff00", fill="#ffff00")
-        green = canvas.create_rectangle(50, 135, 150, 185,
-                                outline="#008000", fill="#008000")
-        canvas.pack(expand=1)
+        red = canvas.create_oval(60, 20, 140, 100,
+                                 outline="#ff0000", fill="#ff0000")
+        yellow = canvas.create_oval(60, 110, 140, 190,
+                                    outline="#ffff00", fill="#ffff00")
+        green = canvas.create_oval(60, 200, 140, 280,
+                                   outline="#008000", fill="#008000")
+        canvas.pack(anchor=CENTER, expand=1)
+
+    def start(self):
+        canvas.create_oval(60, 200, 140, 280,
+                                               outline="#808080", fill="#808080")
 
 
-ex = Example()
-heading = Label(text="Traffic Lights", bg="black", fg="white", height="10", width="40")
-box.mainloop()
+def main():
+    ex = Example()
+    box.mainloop()
+
+
+main()
