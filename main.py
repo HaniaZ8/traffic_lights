@@ -9,6 +9,11 @@
 from tkinter import *
 import time
 
+from unbuffered import Unbuffered
+import sys
+
+sys.stdout = Unbuffered(sys.stdout)
+
 box = Tk()
 box.geometry("300x400")
 canvas = Canvas(width=200, height=300, bg="black")
@@ -22,22 +27,22 @@ def start(can=canvas):
         working = True
         while True:
             print('works')
-            # e = Functions()
+            # e = Fun()
             can.pack(anchor=CENTER, expand=1)
 
             # THE SLEEP() DOESN'T WORK HERE, also trying get it to work in functions.py
             red = can.create_oval(60, 20, 140, 100, outline="#ff0000", fill="#ff0000")
             time.sleep(1)
             yellow = can.create_oval(60, 110, 140, 190, outline="#ffff00", fill="#ffff00")
-            time.sleep(1)
-            time.sleep(2)
+            time.sleep(0)
+            time.sleep(0)
             g_red = can.create_oval(60, 20, 140, 100, outline='#808080', fill='#808080')
             g_yellow = can.create_oval(60, 110, 140, 190, outline='#808080', fill='#808080')
             green = can.create_oval(60, 200, 140, 280, outline="#008000", fill="#008000")
-            time.sleep(5)
+            time.sleep(0)
             g_green = can.create_oval(60, 200, 140, 280, outline='#808080', fill='#808080')
             yellow = can.create_oval(60, 110, 140, 190, outline="#ffff00", fill="#ffff00")
-            time.sleep(2)
+            time.sleep(0)
             g_yellow = can.create_oval(60, 110, 140, 190, outline='#808080', fill='#808080')
 
     else:
@@ -48,8 +53,9 @@ def start(can=canvas):
         g_green = can.create_oval(60, 200, 140, 280, outline='#808080', fill='#808080')
 
 
-class Functions:  # Trying get it to work in functions.py
+class Fun:  # Trying get it to work in functions.py
     can = canvas
+
 
     def __init__(self):
         super().__init__()
@@ -63,26 +69,26 @@ class Functions:  # Trying get it to work in functions.py
     def red_light_on(self):
         for i in range(1):
             time.sleep(0.5)
-            Functions.can.create_oval(60, 20, 140, 100, outline="#ff0000", fill="#ff0000")
+            Fun.can.create_oval(60, 20, 140, 100, outline="#ff0000", fill="#ff0000")
 
     def yellow_light_on(self):
         time.sleep(1)
-        Functions.can.create_oval(60, 110, 140, 190, outline="#ffff00", fill="#ffff00")
+        Fun.can.create_oval(60, 110, 140, 190, outline="#ffff00", fill="#ffff00")
 
     def green_light_on(self):
         time.sleep(1)
-        Functions.can.create_oval(60, 20, 140, 100, outline='#808080', fill='#808080')
-        Functions.can.create_oval(60, 110, 140, 190, outline='#808080', fill='#808080')
-        Functions.can.create_oval(60, 200, 140, 280, outline="#008000", fill="#008000")
+        Fun.can.create_oval(60, 20, 140, 100, outline='#808080', fill='#808080')
+        Fun.can.create_oval(60, 110, 140, 190, outline='#808080', fill='#808080')
+        Fun.can.create_oval(60, 200, 140, 280, outline="#008000", fill="#008000")
 
     def green_light_off(self):
         time.sleep(1)
-        Functions.can.create_oval(60, 200, 140, 280, outline='#808080', fill='#808080')
-        Functions.can.create_oval(60, 110, 140, 190, outline="#ffff00", fill="#ffff00")
+        Fun.can.create_oval(60, 200, 140, 280, outline='#808080', fill='#808080')
+        Fun.can.create_oval(60, 110, 140, 190, outline="#ffff00", fill="#ffff00")
 
     def yellow_light_off(self):
         time.sleep(1)
-        Functions.can.create_oval(60, 110, 140, 190, outline='#808080', fill='#808080')
+        Fun.can.create_oval(60, 110, 140, 190, outline='#808080', fill='#808080')
 
 
 class Example(Frame):
