@@ -1,18 +1,23 @@
-
-
-#testing ways to resolve the sleep issue
 import time
-b = True
-a = True
-#have to have boolean variables for each part (so the sleep seconds don't sum up)
-while a == True:
-    print("start")
-    time.sleep(4)
-    print('end')
-    a = False
 
-while b == True:
-    print("start1")
-    time.sleep(4)
-    print('end1')
-    b = False
+a = True
+b = True
+
+
+def test():
+    global a
+    global b
+    while a:
+        print("1")
+        time.sleep(3)
+        print("2")
+        time.sleep(5)
+        a = False
+    while b:
+        print("a")
+        time.sleep(3)
+        print("b")
+        b = False
+
+
+test()
