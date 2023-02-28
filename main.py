@@ -1,5 +1,4 @@
 from tkinter import *
-import time
 
 """
 So far everything is working fine, I figured out how to put everything in one class (Example) and the changing 
@@ -22,7 +21,7 @@ class Example(Frame):
         self.button = Button(text="START", width=20, height=3, command=self.start)
         self.button.pack(anchor=N, expand=1)
         self.can = self.canvas
-        self.end = False
+        self.condition = False
 
     def initUI(self):  # Here everything is the same as it was
         self.master.title("Traffic Lights")
@@ -30,7 +29,6 @@ class Example(Frame):
         self.canvas.create_oval(60, 200, 140, 280, outline='#808080', fill='#808080')  # these three circles are grey
         self.canvas.create_oval(60, 110, 140, 190, outline='#808080', fill='#808080')
         self.canvas.create_oval(60, 20, 140, 100, outline='#808080', fill='#808080')
-
         self.canvas.pack(anchor=CENTER, expand=1)
 
     def start(self):  # this one initiates the start of lights mechanism (yet to figure out how to make it a loop,
@@ -39,55 +37,82 @@ class Example(Frame):
         if self.button['text'] == 'START':
             print("works")
             self.button.config(text="STOP")
-            # the whole circles changing colours here
-            self.end = True
-            self.working()
-        else:  # The primary state of the box (grey circles)
+            self.condition = True
+            print("Test")
+            while self.condition:
+                if self.condition:
+                    print("WORKING")
+                    self.condition = False
+                    self.red_light_on()
+                else:
+                    print(self.condition)
+                    print("condition False")
+        elif self.button['text'] == 'STOP':  # The primary state of the box (grey circles)
             print("doesn't work")
             g_red = self.can.create_oval(60, 20, 140, 100, outline='#808080', fill='#808080')
             g_yellow = self.can.create_oval(60, 110, 140, 190, outline='#808080', fill='#808080')
             g_green = self.can.create_oval(60, 200, 140, 280, outline='#808080', fill='#808080')
+            self.condition = False
+            print(self.condition)
             self.button.config(text="START")
-            pass
+        else:
+            print("other problem")
 
     # Here we start defining every function needed to continue changing of the lights
+    def working(self):  # attempts to loop the mechanism, or eventually to break it
+        if self.button['text'] == 'STOP':
+            self.red_light_on()
+        else:
+            print(self.condition)
+            print("condition False")
+
     def red_light_on(self):
-        red = self.can.create_oval(60, 20, 140, 100, outline="#ff0000", fill="#ff0000")
-        self.box.after(1000, self.yellow_light_on)
+        if self.button['text'] == 'STOP':
+            red = self.can.create_oval(60, 20, 140, 100, outline="#ff0000", fill="#ff0000")
+            self.box.after(6000, self.yellow_light_on)
+        else:
+            print("condition False")
 
     def yellow_light_on(self):
-        yellow = self.can.create_oval(60, 110, 140, 190, outline="#ffff00", fill="#ffff00")
-        self.box.after(1000, self.green_light_on)
+        if self.button['text'] == 'STOP':
+            yellow = self.can.create_oval(60, 110, 140, 190, outline="#ffff00", fill="#ffff00")
+            self.box.after(1000, self.green_light_on)
+        else:
+            print(self.condition)
+            print("condition False")
 
     def green_light_on(self):
-
-        g_red = self.can.create_oval(60, 20, 140, 100, outline='#808080', fill='#808080')
-        g_yellow = self.can.create_oval(60, 110, 140, 190, outline='#808080', fill='#808080')
-        green = self.can.create_oval(60, 200, 140, 280, outline="#008000", fill="#008000")
-        self.box.after(1000, self.green_light_off)
+        if self.button['text'] == 'STOP':
+            g_red = self.can.create_oval(60, 20, 140, 100, outline='#808080', fill='#808080')
+            g_yellow = self.can.create_oval(60, 110, 140, 190, outline='#808080', fill='#808080')
+            green = self.can.create_oval(60, 200, 140, 280, outline="#008000", fill="#008000")
+            self.box.after(6000, self.green_light_off)
+        else:
+            print(self.condition)
+            print("condition False")
 
     def green_light_off(self):
-        g_green = self.can.create_oval(60, 200, 140, 280, outline='#808080', fill='#808080')
-        yellow = self.can.create_oval(60, 110, 140, 190, outline="#ffff00", fill="#ffff00")
-        self.box.after(1000, self.yellow_light_off)
+        if self.button['text'] == 'STOP':
+            g_green = self.can.create_oval(60, 200, 140, 280, outline='#808080', fill='#808080')
+            yellow = self.can.create_oval(60, 110, 140, 190, outline="#ffff00", fill="#ffff00")
+            self.box.after(1000, self.yellow_light_off)
+        else:
+            print(self.condition)
+            print("condition False")
 
     def yellow_light_off(self):
-        g_yellow = self.can.create_oval(60, 110, 140, 190, outline='#808080', fill='#808080')
-        self.end = True
-
-    def working(self):  # attempts to loop the mechanism, or eventually to break it
-        while True:
-            if self.end:
-                self.red_light_on()
-                self.end = False
-            else:
-                break
+        if self.button['text'] == 'STOP':
+            g_yellow = self.can.create_oval(60, 110, 140, 190, outline='#808080', fill='#808080')
+            self.condition = True
+            self.working()
+        else:
+            print(self.condition)
+            print("condition False")
 
 
 def main():
     box = Tk()
     ex = Example(box)
     box.mainloop()
-
 
 main()
